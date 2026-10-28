@@ -12,5 +12,15 @@ body { margin: 0; }
 .banner { display: flex; align-items: center; justify-content: center; width: 100%; height: 162px; border-radius: 12px; background: #007f83; color: #fff; font: 700 clamp(28px, 6vw, 48px)/1.1 Arial, sans-serif; }
 </style>
 </head>
-<body><main class="display-area"><div class="banner">Cosmo PoC</div></main></body>
+<body>
+<main class="display-area"><div class="banner">Cosmo PoC</div></main>
+<script>
+const lang = new URLSearchParams(window.location.search).get('lang');
+const labels = { en: 'Cosmo PoC EN', zh: '靠靠出行' };
+if (Object.hasOwn(labels, lang)) {
+  document.querySelector('.banner').textContent = labels[lang];
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
 </html>
