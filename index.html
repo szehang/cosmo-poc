@@ -1,26 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cosmo PoC</title>
-<style>
-* { box-sizing: border-box; }
-html { min-height: 100%; background: #17243b; }
-body { margin: 0; }
-.display-area { width: 100%; height: 178px; padding: 8px; background: #ffcf40; }
-.banner { display: flex; align-items: center; justify-content: center; width: 100%; height: 162px; border-radius: 12px; background: #007f83; color: #fff; text-decoration: none; font: 700 clamp(28px, 6vw, 48px)/1.1 Arial, sans-serif; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmo banner</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #fff; }
+    .display-area {
+      width: 100%;
+      padding: 10px 15px 11px 14px;
+      background: #fff;
+    }
+    .banner {
+      display: block;
+      width: 100%;
+    }
+    .banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-<main class="display-area"><a class="banner" href="https://app.octopus.com.hk/h5/cosmo">Cosmo PoC</a></main>
-<script>
-const lang = new URLSearchParams(window.location.search).get('lang');
-const labels = { en: 'Cosmo PoC EN', zh: '靠靠出行' };
-if (Object.hasOwn(labels, lang)) {
-  document.querySelector('.banner').textContent = labels[lang];
-  document.documentElement.lang = lang;
-}
-</script>
+  <main class="display-area">
+    <a class="banner" href="https://app.octopus.com.hk/h5/cosmo">
+      <img id="banner-image" src="COSMO_static_EN_promo-off.png" alt="Book a Ride via COSMO">
+    </a>
+  </main>
+  <script>
+    // Change this flag manually to select the promotion-on images.
+    const isPromotionEnabled = false;
+
+    const lang = new URLSearchParams(window.location.search).get('lang') === 'zh' ? 'zh' : 'en';
+    const imageLanguage = lang === 'zh' ? 'TC' : 'EN';
+    const promotionState = isPromotionEnabled ? 'on' : 'off';
+    const bannerImage = document.getElementById('banner-image');
+
+    bannerImage.src = `COSMO_static_${imageLanguage}_promo-${promotionState}.png`;
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+  </script>
 </body>
 </html>
